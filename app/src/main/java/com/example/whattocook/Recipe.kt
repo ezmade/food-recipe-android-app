@@ -1,9 +1,11 @@
 package com.example.whattocook
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Recipe (
     val name: String,
     val category: String = "Others",
     val totalPrice: Int,
-): Serializable
+): Parcelable
