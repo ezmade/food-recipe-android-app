@@ -1,4 +1,4 @@
-package com.example.whattocook.ui
+package com.example.whattocook.feature.recipesList.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,9 @@ import android.view.View
 import com.example.whattocook.R
 import com.example.whattocook.Recipe
 import com.example.whattocook.databinding.FragmentRecipesListBinding
+import com.example.whattocook.feature.search.ui.CustomSearchFragment
+import com.example.whattocook.feature.favouriteRecipes.ui.FavouriteRecipesFragment
+import com.example.whattocook.feature.recipeDetails.ui.RecipeDetailsFragment
 
 class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
 

@@ -2,9 +2,7 @@ package com.example.whattocook
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.whattocook.databinding.ActivityMainBinding
-import com.example.whattocook.ui.FavouriteRecipesFragment
-import com.example.whattocook.ui.RecipesListFragment
+import com.example.whattocook.feature.recipesList.ui.RecipesListFragment
 
 class MainActivity : AppCompatActivity() {
 

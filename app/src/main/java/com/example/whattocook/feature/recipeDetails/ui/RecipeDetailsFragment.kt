@@ -1,14 +1,11 @@
-package com.example.whattocook.ui
+package com.example.whattocook.feature.recipeDetails.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.example.whattocook.R
 import com.example.whattocook.Recipe
 import com.example.whattocook.databinding.FragmentRecipeDetailsBinding
-import com.example.whattocook.databinding.FragmentRecipesListBinding
 
 class RecipeDetailsFragment : Fragment(R.layout.fragment_recipe_details) {
 
