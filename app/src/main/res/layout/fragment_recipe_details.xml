@@ -5,38 +5,39 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:id="@+id/recipeName"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/recipe"
-        android:textSize="50sp"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textAllCaps="true"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/recipeName"
+    <ImageButton
+        android:id="@+id/btnViewFavourites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="Meal: "
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:src="@drawable/ic_baseline_favourite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/btnViewFavouritesDescription" />
 
     <TextView
         android:id="@+id/recipeCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         android:text="Category: "
-        android:textAlignment="center"
-        android:textSize="30sp"
+        android:textAlignment="textStart"
+        android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="@id/recipeName"
         app:layout_constraintTop_toBottomOf="@id/recipeName" />
 
@@ -44,9 +45,10 @@
         android:id="@+id/recipeTotalPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Price: "
-        android:textAlignment="center"
-        android:textSize="30sp"
+        android:layout_marginTop="8dp"
+        android:text="Country: "
+        android:textAlignment="textStart"
+        android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="@id/recipeName"
         app:layout_constraintTop_toBottomOf="@id/recipeCategory" />
 

@@ -11,17 +11,8 @@ import org.junit.Assert.*
  */
 class ExampleUnitTest {
 
-    val carbonara = Recipe(name = "Carbonara", category = "Pasta", totalPrice = 300)
-    val fishPie = Recipe(name = "Fish pie", category = "Seafood", totalPrice = 130)
-    val madeiraCake = Recipe(name = "Madeira Cake", category = "Desert", totalPrice = 515)
-    val collection = mutableListOf(carbonara, fishPie, madeiraCake)
-
     @Test
     fun start() {
-        print(collection.sortByPrice())
     }
 
-    fun List<Recipe>.sortByPrice(): List<Recipe> {
-        return this.sortedBy { it.totalPrice }
-    }
 }

@@ -28,9 +28,9 @@ class RecipeDetailsFragment : Fragment(R.layout.fragment_recipe_details) {
         binding = FragmentRecipeDetailsBinding.bind(view)
         arguments?.let {
             val recipe = it.getParcelable<Recipe>(RECIPE)
-            binding.recipeName.text ="Meal: ${recipe?.name}"
+            binding.recipeName.text =recipe?.name
             binding.recipeCategory.text = "Category: ${recipe?.category}"
-            binding.recipeTotalPrice.text = "Price: ${recipe?.totalPrice}"
+            binding.recipeTotalPrice.text = "Area: ${recipe?.area}"
         }
     }
 }

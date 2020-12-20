@@ -7,5 +7,5 @@ import kotlinx.android.parcel.Parcelize
 data class Recipe (
     val name: String,
     val category: String = "Others",
-    val totalPrice: Int,
+    val area: String = "Unknown",
 ): Parcelable

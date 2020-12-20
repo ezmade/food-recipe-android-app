@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">What To Cook</string>
     <string name="custom_search">Custom Search</string>
-    <string name="favourites_recipes">Favourites Recipes</string>
+    <string name="favourites_recipes">Favourites</string>
     <string name="recipe">Recipe</string>
     <string name="btnSearchText">Search</string>
     <string name="etIngredientsHint">Main ingredient</string>
+    <string name="btnViewFavouritesDescription">Favourites</string>
+    <string name="btnCustomSearchDescription">Custom Search</string>
     <string-array name="categoryNames">
         <item>Beef</item>
         <item>Breakfast</item>

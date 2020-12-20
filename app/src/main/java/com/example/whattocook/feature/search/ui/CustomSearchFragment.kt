@@ -9,10 +9,14 @@ import com.example.whattocook.databinding.FragmentCustomSearchBinding
 import com.example.whattocook.feature.search.presentation.CustomSearchPresenter
 import com.example.whattocook.feature.search.presentation.CustomSearchView
 import kotlinx.android.synthetic.main.fragment_custom_search.*
+import moxy.MvpAppCompatFragment
+import moxy.ktx.moxyPresenter
 
-class CustomSearchFragment : Fragment(R.layout.fragment_custom_search), CustomSearchView {
+class CustomSearchFragment : MvpAppCompatFragment(R.layout.fragment_custom_search), CustomSearchView {
 
-    private val presenter = CustomSearchPresenter()
+    private val presenter : CustomSearchPresenter by moxyPresenter {
+        CustomSearchPresenter()
+    }
     private lateinit var binding: FragmentCustomSearchBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
