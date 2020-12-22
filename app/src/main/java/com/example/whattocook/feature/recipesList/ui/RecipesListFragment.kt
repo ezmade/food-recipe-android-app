@@ -41,7 +41,7 @@ class RecipesListFragment : MvpAppCompatFragment(R.layout.fragment_recipes_list)
         }
 
         binding.btnViewFavourites.setOnClickListener {
-            openFavourites()
+            presenter.onFavouritesClick()
         }
 
     }
@@ -62,7 +62,7 @@ class RecipesListFragment : MvpAppCompatFragment(R.layout.fragment_recipes_list)
                 .commit()
     }
 
-    private fun openFavourites() {
+    override fun openFavourites() {
         requireFragmentManager().beginTransaction()
                 .replace(R.id.container, FavouriteRecipesFragment())
                 .addToBackStack("FavouriteRecipesFragment")

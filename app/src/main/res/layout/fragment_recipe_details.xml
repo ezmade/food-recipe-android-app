@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/btnViewFavourites"
+        android:id="@+id/addToFavourites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -42,11 +42,11 @@
         app:layout_constraintTop_toBottomOf="@id/recipeName" />
 
     <TextView
-        android:id="@+id/recipeTotalPrice"
+        android:id="@+id/recipeArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Country: "
+        android:text="Area: "
         android:textAlignment="textStart"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="@id/recipeName"

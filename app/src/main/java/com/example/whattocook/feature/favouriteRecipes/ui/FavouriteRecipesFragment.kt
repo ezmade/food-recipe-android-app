@@ -1,53 +1,58 @@
 package com.example.whattocook.feature.favouriteRecipes.ui
 
+import android.content.Context
 import android.os.Bundle
+
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.whattocook.R
 import com.example.whattocook.Recipe
+import com.example.whattocook.data.FavouritesDaoImpl
 import com.example.whattocook.databinding.FragmentFavouriteRecipesBinding
-import com.example.whattocook.feature.favouriteRecipes.presentation.FavoriteRecipesView
 import com.example.whattocook.feature.favouriteRecipes.presentation.FavouriteRecipesPresenter
+import com.example.whattocook.feature.favouriteRecipes.presentation.FavouriteRecipesView
 import com.example.whattocook.feature.recipeDetails.ui.RecipeDetailsFragment
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class FavouriteRecipesFragment : MvpAppCompatFragment(R.layout.fragment_favourite_recipes), FavoriteRecipesView{
+class FavouriteRecipesFragment : MvpAppCompatFragment(R.layout.fragment_favourite_recipes), FavouriteRecipesView {
 
-    val recipe = Recipe("Carbonara", "Pasta", "Italian")
+    companion object {
+        fun newInstance() = FavouriteRecipesFragment()
+    }
+
     private lateinit var binding: FragmentFavouriteRecipesBinding
     private val presenter: FavouriteRecipesPresenter by moxyPresenter {
-        FavouriteRecipesPresenter()
+        FavouriteRecipesPresenter(
+                favouritesDao = FavouritesDaoImpl(
+                        requireContext().getSharedPreferences("data", Context.MODE_PRIVATE)
+                )
+        )
     }
+
     private var favouriteRecipesAdapter : FavouriteRecipesAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFavouriteRecipesBinding.bind(view)
         with(binding.rvRecipesList) {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = FavouriteRecipesAdapter(onRecipeClick = { recipe ->
-                presenter.onRecipeClick(recipe)
-            }).also {
-                favouriteRecipesAdapter = it
+            favouriteRecipesAdapter = FavouriteRecipesAdapter(onRecipeClick = {
+                presenter.onRecipeClick(it)
+            })
+            layoutManager = LinearLayoutManager(context)
+            adapter = favouriteRecipesAdapter
             }
         }
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        favouriteRecipesAdapter = null
+    override fun openRecipeDetails(recipe: Recipe) {
+        requireFragmentManager().beginTransaction()
+            .replace(R.id.container, RecipeDetailsFragment.newInstance(recipe))
+            .addToBackStack("RecipeDetailsFragment")
+            .commit()
     }
 
     override fun setRecipes(recipes: List<Recipe>) {
         favouriteRecipesAdapter?.submitList(recipes)
-    }
-
-    override fun openRecipeDetails(recipe: Recipe) {
-        requireFragmentManager().beginTransaction()
-                .replace(R.id.container, RecipeDetailsFragment.newInstance(recipe))
-                .addToBackStack("RecipeDetailsFragment")
-                .commit()
     }
 }
 

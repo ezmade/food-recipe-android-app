@@ -1,4 +1,4 @@
-package com.example.whattocook.feature.favouriteRecipes.presentation
+package com.example.whattocook.feature.recipeDetails.presentation
 
 import com.example.whattocook.Recipe
 import moxy.MvpView
@@ -6,11 +6,12 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-interface FavoriteRecipesView : MvpView {
+interface RecipeDetailsView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun setRecipes(recipes: List<Recipe>)
+    fun setRecipe(recipe: Recipe)
 
-    @StateStrategyType(OneExecutionStateStrategy::class)
-    fun openRecipeDetails(recipe: Recipe)
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun setIsInFavourites(inFavourites: Boolean)
+
 }

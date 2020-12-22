@@ -22,5 +22,9 @@ class RecipesListPresenter : MvpPresenter<RecipesListView>()  {
     fun onRecipeClick(recipe: Recipe) {
         viewState.openRecipeDetails(recipe)
     }
+
+    fun onFavouritesClick() {
+        viewState.openFavourites()
+    }
 }
 
