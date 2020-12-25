@@ -12,6 +12,7 @@ import com.example.whattocook.databinding.FragmentFavouriteRecipesBinding
 import com.example.whattocook.feature.favouriteRecipes.presentation.FavouriteRecipesPresenter
 import com.example.whattocook.feature.favouriteRecipes.presentation.FavouriteRecipesView
 import com.example.whattocook.feature.recipeDetails.ui.RecipeDetailsFragment
+import com.example.whattocook.feature.recipesList.ui.RecipesListAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -30,13 +31,13 @@ class FavouriteRecipesFragment : MvpAppCompatFragment(R.layout.fragment_favourit
         )
     }
 
-    private var favouriteRecipesAdapter : FavouriteRecipesAdapter? = null
+    private var favouriteRecipesAdapter : RecipesListAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFavouriteRecipesBinding.bind(view)
         with(binding.rvRecipesList) {
-            favouriteRecipesAdapter = FavouriteRecipesAdapter(onRecipeClick = {
+            favouriteRecipesAdapter = RecipesListAdapter(context, onRecipeClick = {
                 presenter.onRecipeClick(it)
             })
             layoutManager = LinearLayoutManager(context)
@@ -51,8 +52,8 @@ class FavouriteRecipesFragment : MvpAppCompatFragment(R.layout.fragment_favourit
             .commit()
     }
 
-    override fun setRecipes(recipes: List<Recipe>) {
-        favouriteRecipesAdapter?.submitList(recipes)
+    override fun setRecipes(recipe: List<Recipe>) {
+        favouriteRecipesAdapter?.setData(recipe)
     }
 }
 

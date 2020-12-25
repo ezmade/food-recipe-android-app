@@ -1,15 +1,20 @@
 package com.example.whattocook.feature.recipesList.ui
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.whattocook.R
 import com.example.whattocook.Recipe
+import com.squareup.picasso.Picasso
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.recipes_list_item.*
+import kotlin.coroutines.coroutineContext
 
-class RecipesListAdapter(private val onRecipeClick: (Recipe) -> Unit) :
+class RecipesListAdapter(
+    val context: Context,
+    private val onRecipeClick: (Recipe) -> Unit) :
         RecyclerView.Adapter<RecipesListAdapter.ViewHolder>() {
 
     private val recipes: MutableList<Recipe> = mutableListOf()
@@ -29,9 +34,14 @@ class RecipesListAdapter(private val onRecipeClick: (Recipe) -> Unit) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = recipes[position]
+        Picasso.with(context)
+            .load(item.img)
+            .priority(Picasso.Priority.HIGH)
+            .resize(100, 100)
+            .centerCrop()
+            .into(holder.recipesImage)
         holder.recipesListName.text = item.name
-        holder.recipesListCategory.text = item.category
-        holder.recipesListArea.text = item.area
+        holder.recipesListTimeReady.text = "${item.ready} min"
         holder.containerView.setOnClickListener {
             onRecipeClick(item)
         }

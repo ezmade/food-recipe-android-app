@@ -2,7 +2,6 @@ package com.example.whattocook.feature.recipeDetails.presentation
 
 import com.example.whattocook.Recipe
 import com.example.whattocook.data.FavouritesDao
-import com.example.whattocook.feature.recipeDetails.ui.RecipeDetailsFragment
 import moxy.MvpPresenter
 
 class RecipeDetailsPresenter(

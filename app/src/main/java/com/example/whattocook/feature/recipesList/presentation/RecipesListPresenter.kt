@@ -1,22 +1,28 @@
 package com.example.whattocook.feature.recipesList.presentation
 
+import android.util.Log
 import com.example.whattocook.Recipe
+import com.example.whattocook.domain.GetRecipesListUseCase
+import com.example.whattocook.extensions.launchWithErrorHandler
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.launch
 import moxy.MvpPresenter
+import moxy.presenterScope
 
-class RecipesListPresenter : MvpPresenter<RecipesListView>()  {
-
-    private val recipes = listOf(
-            Recipe("Carbonara", "Pasta", "Italian"),
-            Recipe("BeaverTails", "Desert", "Canadian"),
-            Recipe("Peanut Butter Cookies", "Dessert", "American"),
-            Recipe("Beef stroganoff", "Beef", "Russian"),
-            Recipe("Chocolate Caramel Crispy", "Dessert", "British"),
-            Recipe("Stamppot", "Pork", "Dutch")
-    )
+class RecipesListPresenter(
+       private val getRecipesListUseCase: GetRecipesListUseCase
+) : MvpPresenter<RecipesListView>()  {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.setRecipes(recipes)
+        viewState.showLoading(isShow = true)
+        presenterScope.launchWithErrorHandler(block = {
+            val recipes = getRecipesListUseCase()
+            viewState.setRecipes(recipes)
+            viewState.showLoading(isShow = false)
+        }, onError = {
+            viewState.showLoading(isShow = false)
+        })
     }
 
     fun onRecipeClick(recipe: Recipe) {

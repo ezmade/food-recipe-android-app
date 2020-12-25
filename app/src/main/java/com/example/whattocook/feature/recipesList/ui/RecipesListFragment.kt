@@ -2,10 +2,13 @@ package com.example.whattocook.feature.recipesList.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.whattocook.R
 import com.example.whattocook.Recipe
 import com.example.whattocook.databinding.FragmentRecipesListBinding
+import com.example.whattocook.di.RECIPES_API
+import com.example.whattocook.domain.GetRecipesListUseCase
 import com.example.whattocook.feature.favouriteRecipes.ui.FavouriteRecipesFragment
 import com.example.whattocook.feature.recipeDetails.ui.RecipeDetailsFragment
 import com.example.whattocook.feature.recipesList.presentation.RecipesListPresenter
@@ -16,10 +19,9 @@ import moxy.ktx.moxyPresenter
 
 class RecipesListFragment : MvpAppCompatFragment(R.layout.fragment_recipes_list), RecipesListView {
 
-    val recipe = Recipe("Carbonara", "Pasta", "Italian")
     private lateinit var binding: FragmentRecipesListBinding
     private val presenter: RecipesListPresenter by moxyPresenter {
-        RecipesListPresenter()
+        RecipesListPresenter(GetRecipesListUseCase(RECIPES_API))
     }
     private var recipesAdapter: RecipesListAdapter? = null
 
@@ -29,7 +31,7 @@ class RecipesListFragment : MvpAppCompatFragment(R.layout.fragment_recipes_list)
 
         with(binding.rvRecipesList) {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = RecipesListAdapter(onRecipeClick = { recipe ->
+            adapter = RecipesListAdapter(context, onRecipeClick = { recipe ->
                 presenter.onRecipeClick(recipe)
             }).also {
                 recipesAdapter = it
@@ -51,8 +53,12 @@ class RecipesListFragment : MvpAppCompatFragment(R.layout.fragment_recipes_list)
         recipesAdapter = null
     }
 
-    override fun setRecipes(recipes: List<Recipe>) {
-        recipesAdapter?.setData(recipes)
+    override fun setRecipes(recipeData: List<Recipe>) {
+        recipesAdapter?.setData(recipeData)
+    }
+
+    override fun showLoading(isShow: Boolean) {
+        binding.recipesListProgressBar.isVisible = isShow
     }
 
     override fun openRecipeDetails(recipe: Recipe) {
