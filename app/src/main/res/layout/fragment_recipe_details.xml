@@ -26,7 +26,19 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/addToFavourites"
+            android:id="@+id/btnShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@null"
+            android:src="@drawable/ic_baseline_share"
+            app:layout_constraintEnd_toStartOf="@id/btnAddToFavourites"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/btnCustomSearchDescription" />
+
+        <ImageButton
+            android:id="@+id/btnAddToFavourites"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

@@ -1,5 +1,6 @@
 package com.example.whattocook.feature.recipeDetails.presentation
 
+import android.graphics.Bitmap
 import com.example.whattocook.Recipe
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
@@ -16,5 +17,8 @@ interface RecipeDetailsView : MvpView {
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun openViewOnWebsite(recipe: Recipe)
+
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun shareRecipe(img: Bitmap, recipe: Recipe)
 
 }

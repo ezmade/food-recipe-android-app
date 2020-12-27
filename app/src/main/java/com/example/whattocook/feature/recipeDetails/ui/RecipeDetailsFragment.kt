@@ -2,9 +2,12 @@ package com.example.whattocook.feature.recipeDetails.ui
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.FileProvider
+import androidx.core.graphics.drawable.toBitmap
 import com.example.whattocook.R
 import com.example.whattocook.Recipe
 import com.example.whattocook.data.FavouritesDaoImpl
@@ -14,6 +17,8 @@ import com.example.whattocook.feature.recipeDetails.presentation.RecipeDetailsVi
 import com.squareup.picasso.Picasso
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import java.io.File
+import java.io.FileOutputStream
 
 class RecipeDetailsFragment : MvpAppCompatFragment(R.layout.fragment_recipe_details),
         RecipeDetailsView {
@@ -46,8 +51,14 @@ class RecipeDetailsFragment : MvpAppCompatFragment(R.layout.fragment_recipe_deta
         binding.btnViewOnWebsite.setOnClickListener {
             presenter.onViewOnWebsiteClicked(arguments?.getParcelable(RECIPE)!!)
         }
-        binding.addToFavourites.setOnClickListener{
+        binding.btnAddToFavourites.setOnClickListener{
             presenter.onFavouriteClicked()
+        }
+        binding.btnShare.setOnClickListener {
+            presenter.onShareClicked(
+                    binding.recipesImage.drawable.toBitmap(),
+                    arguments?.getParcelable(RECIPE)!!
+            )
         }
     }
 
@@ -70,10 +81,33 @@ class RecipeDetailsFragment : MvpAppCompatFragment(R.layout.fragment_recipe_deta
     }
 
     override fun setIsInFavourites(inFavourites: Boolean) {
-        binding.addToFavourites.setImageResource(
+        binding.btnAddToFavourites.setImageResource(
                 if (inFavourites) R.drawable.ic_baseline_favourite_filled
                 else R.drawable.ic_baseline_favourite
         )
+    }
+
+    override fun shareRecipe(img: Bitmap, recipe: Recipe) {
+        val file = File(context?.externalCacheDir?.path + "/image.png")
+        val shareText = "I found " + recipe.name + " recipe! Follow the link to see more:\n\n" + recipe.url
+        FileOutputStream(file).apply {
+            img.compress(Bitmap.CompressFormat.PNG, 100, this)
+            flush()
+            close()
+        }
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        intent.putExtra(
+                Intent.EXTRA_STREAM,
+                FileProvider.getUriForFile(
+                        context!!,
+                        "com.ezmade.fileprovider",
+                        file
+                )
+        )
+        intent.putExtra(Intent.EXTRA_TEXT, shareText)
+        intent.type = "image/*"
+        startActivity(Intent.createChooser(intent, "Share recipe"))
     }
 }
 
@@ -91,4 +125,6 @@ private fun String.formatted(): String {
             .replace("</strong>", "")
             .replace("</em>", "")
             .replace("</li></ul>", "")
+            .replace("<span>", "")
+            .replace("</span", "")
 }

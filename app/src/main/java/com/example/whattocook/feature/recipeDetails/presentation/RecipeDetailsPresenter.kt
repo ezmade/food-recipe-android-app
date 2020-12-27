@@ -1,5 +1,6 @@
 package com.example.whattocook.feature.recipeDetails.presentation
 
+import android.graphics.Bitmap
 import com.example.whattocook.Recipe
 import com.example.whattocook.data.FavouritesDao
 import moxy.MvpPresenter
@@ -31,5 +32,9 @@ class RecipeDetailsPresenter(
 
     fun onViewOnWebsiteClicked(recipe: Recipe) {
         viewState.openViewOnWebsite(recipe)
+    }
+
+    fun onShareClicked(img: Bitmap, recipe: Recipe) {
+        viewState.shareRecipe(img, recipe)
     }
 }
