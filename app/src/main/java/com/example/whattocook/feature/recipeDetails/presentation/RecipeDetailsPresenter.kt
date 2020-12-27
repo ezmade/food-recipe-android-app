@@ -28,4 +28,8 @@ class RecipeDetailsPresenter(
         isInFavourites = !isInFavourites
         viewState.setIsInFavourites(isInFavourites)
     }
+
+    fun onViewOnWebsiteClicked(recipe: Recipe) {
+        viewState.openViewOnWebsite(recipe)
+    }
 }

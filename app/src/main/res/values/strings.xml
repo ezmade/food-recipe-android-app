@@ -4,66 +4,42 @@
     <string name="favourites_recipes">Favourites</string>
     <string name="recipe">Recipe</string>
     <string name="btnSearchText">Search</string>
-    <string name="etIngredientsHint">Main ingredient</string>
+    <string name="etNumberOfRecipesHint">Number of recipes</string>
     <string name="btnViewFavouritesDescription">Favourites</string>
     <string name="btnCustomSearchDescription">Custom Search</string>
+    <string name="tvDietType">Choose the diet type</string>
+    <string name="tvDishType">Choose the dish type</string>
+    <string name="btnVisitWebsite">View on website</string>
     <string-array name="categoryNames">
-        <item>Beef</item>
-        <item>Breakfast</item>
-        <item>Chicken</item>
-        <item>Dessert</item>
-        <item>Goat</item>
-        <item>Lamb</item>
-        <item>Miscellaneous</item>
-        <item>Pasta</item>
-        <item>Pork</item>
-        <item>Seafood</item>
-        <item>Side</item>
-        <item>Starter</item>
-        <item>Vegan</item>
-        <item>Vegetarian</item>
+        <item></item>
+        <item>main course</item>
+        <item>side dish</item>
+        <item>dessert</item>
+        <item>appertizer</item>
+        <item>salad</item>
+        <item>bread</item>
+        <item>breakfast</item>
+        <item>soup</item>
+        <item>beverage</item>
+        <item>sause</item>
+        <item>marinade</item>
+        <item>finderfood</item>
+        <item>snack</item>
+        <item>drink</item>
     </string-array>
-    <string-array name="areaNames">
-        <item>American</item>
-        <item>British</item>
-        <item>Canadian</item>
-        <item>Chinese</item>
-        <item>Dutch</item>
-        <item>Egyptian</item>
-        <item>French</item>
-        <item>Greek</item>
-        <item>Indian</item>
-        <item>Irish</item>
-        <item>Italian</item>
-        <item>Jamaican</item>
-        <item>Japanese</item>
-        <item>Kenyan</item>
-        <item>Malaysian</item>
-        <item>Mexican</item>
-        <item>Moroccan</item>
-        <item>Polish</item>
-        <item>Russian</item>
-        <item>Spanish</item>
-        <item>Thai</item>
-        <item>Tunisian</item>
-        <item>Turkish</item>
-        <item>Vietnamese</item>
-        <item>Unknown</item>
+
+    <string-array name="dietNames">
+        <item></item>
+        <item>gluten free</item>
+        <item>ketogenic</item>
+        <item>vegetarian</item>
+        <item>lacto-vegetarian</item>
+        <item>ovo-vegetarian</item>
+        <item>vegan</item>
+        <item>pescetarian</item>
+        <item>paleo</item>
+        <item>primal</item>
+        <item>whole30</item>
     </string-array>
-    <string-array name="ingredientNames">
-        <item>Chicken</item>
-        <item>Salmon</item>
-        <item>Beef</item>
-        <item>Pork</item>
-        <item>Avocado</item>
-        <item>Asparagus</item>
-        <item>Bacon</item>
-        <item>Basil</item>
-        <item>Pepper</item>
-        <item>Bread</item>
-        <item>Broccoli</item>
-        <item>Butter</item>
-        <item>Cacao</item>
-        <item>Carrots</item>
-    </string-array>
+
 </resources>

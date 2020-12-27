@@ -1,5 +1,6 @@
 package com.example.whattocook.feature.recipesList.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -19,9 +20,29 @@ import moxy.ktx.moxyPresenter
 
 class RecipesListFragment : MvpAppCompatFragment(R.layout.fragment_recipes_list), RecipesListView {
 
+    companion object {
+
+        private const val FILTERS = "FILTERS"
+        private const val NUMBER = "NUMBER"
+
+        fun newInstance(
+                number: Int,
+                filters: String
+        ) = RecipesListFragment().apply {
+                    arguments = Bundle().apply {
+                        putInt(NUMBER, number)
+                        putString(FILTERS, filters)
+                    }
+                }
+    }
+
+
     private lateinit var binding: FragmentRecipesListBinding
     private val presenter: RecipesListPresenter by moxyPresenter {
-        RecipesListPresenter(GetRecipesListUseCase(RECIPES_API))
+        RecipesListPresenter(
+                arguments?.getInt(NUMBER) ?: 25,
+                arguments?.getString(FILTERS) ?: "",
+                GetRecipesListUseCase(RECIPES_API))
     }
     private var recipesAdapter: RecipesListAdapter? = null
 
@@ -45,6 +66,13 @@ class RecipesListFragment : MvpAppCompatFragment(R.layout.fragment_recipes_list)
         binding.btnViewFavourites.setOnClickListener {
             presenter.onFavouritesClick()
         }
+
+
+
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
 
     }
 

@@ -9,6 +9,7 @@ interface RecipesApi {
     @GET("recipes/random")
     suspend fun getRecipesList(
             @Query("number") number: Int,
-            @Query("apiKey") apiKey: String = "7af940a49d524d50ad66f72a4dac4256"
+            @Query("apiKey") apiKey: String = "7af940a49d524d50ad66f72a4dac4256",
+            @Query("tags") tags: String,
     ): RecipesListResponse
 }

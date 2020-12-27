@@ -10,11 +10,10 @@ import com.example.whattocook.Recipe
 import com.squareup.picasso.Picasso
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.recipes_list_item.*
-import kotlin.coroutines.coroutineContext
 
 class RecipesListAdapter(
-    val context: Context,
-    private val onRecipeClick: (Recipe) -> Unit) :
+        private val context: Context,
+        private val onRecipeClick: (Recipe) -> Unit) :
         RecyclerView.Adapter<RecipesListAdapter.ViewHolder>() {
 
     private val recipes: MutableList<Recipe> = mutableListOf()
@@ -42,6 +41,7 @@ class RecipesListAdapter(
             .into(holder.recipesImage)
         holder.recipesListName.text = item.name
         holder.recipesListTimeReady.text = "${item.ready} min"
+        holder.recipesListPrice.text = String.format("%.2f", item.price / 100)
         holder.containerView.setOnClickListener {
             onRecipeClick(item)
         }

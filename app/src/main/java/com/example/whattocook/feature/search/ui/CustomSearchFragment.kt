@@ -1,14 +1,13 @@
 package com.example.whattocook.feature.search.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
 import com.example.whattocook.R
 import com.example.whattocook.databinding.FragmentCustomSearchBinding
+import com.example.whattocook.feature.recipesList.ui.RecipesListFragment
 import com.example.whattocook.feature.search.presentation.CustomSearchPresenter
 import com.example.whattocook.feature.search.presentation.CustomSearchView
-import kotlinx.android.synthetic.main.fragment_custom_search.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -27,25 +26,30 @@ class CustomSearchFragment : MvpAppCompatFragment(R.layout.fragment_custom_searc
     }
 
     private fun initListeners() {
+        var selectedDietType: String
+        var selectedDishType: String
 
         binding = FragmentCustomSearchBinding.bind(requireView())
-        val selectedCategory: String = binding.spinnerCategories.selectedItem.toString()
-        val selectedArea: String = binding.spinnerAreas.selectedItem.toString()
-        val ingredients = requireContext().resources.getStringArray(R.array.ingredientNames)
-
-        presenter.setCategory(selectedCategory)
-        presenter.setArea(selectedArea)
-
-       binding.btnSearch.setOnClickListener {
+        binding.btnSearch.setOnClickListener {
+            selectedDietType = binding.spinnerDietType.selectedItem.toString()
+            selectedDishType = binding.spinnerDishType.selectedItem.toString()
             presenter.validate(
-                    etIngredients.text.toString(),
-                    ingredients
+                    selectedDietType,
+                    selectedDishType,
+                    binding.etNumbersOfRecipes.text.toString()
             )
         }
     }
 
-    override fun showIngredientsError() {
-        Toast.makeText(requireContext(), "Unknown ingredient", Toast.LENGTH_SHORT).show()
+    override fun setFilters(number: Int, tags: String) {
+        requireFragmentManager().beginTransaction()
+                .replace(R.id.container, RecipesListFragment.newInstance(number, tags))
+                .addToBackStack("RecipesListFragment")
+                .commit()
+    }
+
+    override fun showNumberOfRecipesError() {
+        Toast.makeText(requireContext(), "Invalid number of recipes", Toast.LENGTH_SHORT).show()
     }
 
 }

@@ -12,5 +12,7 @@ data class Recipe(
         val category: String = "Others",
         val ready: Int = 0,
         val img: String = "",
-        val instructions: String = ""
+        val instructions: String = "",
+        val url: String = "",
+        val price: Double
 ): Parcelable

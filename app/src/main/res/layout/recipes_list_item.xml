@@ -32,29 +32,63 @@
     <TextView
         android:id="@+id/recipesListName"
         android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/recipesImageFrame"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Name"/>
+        app:layout_constraintStart_toEndOf="@+id/recipesImageFrame"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.192"
+        tools:text="Name" />
+
+    <ImageView
+        android:id="@+id/recipesListTimeIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_baseline_time"
+        app:layout_constraintTop_toBottomOf="@id/recipesListName"
+        app:layout_constraintStart_toStartOf="@id/recipesListName"
+        android:contentDescription="@string/recipe" />
 
     <TextView
         android:id="@+id/recipesListTimeReady"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:textSize="15sp"
         android:textColor="@color/orange"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/recipesListTimeIcon"
         app:layout_constraintTop_toBottomOf="@+id/recipesListName"
-        app:layout_constraintStart_toEndOf="@+id/recipesImageFrame"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text=""/>
+        tools:text="35 min" />
+
+    <ImageView
+        android:id="@+id/recipesListPriceIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_baseline_price"
+        app:layout_constraintTop_toBottomOf="@id/recipesListName"
+        app:layout_constraintStart_toEndOf="@id/recipesListTimeReady"
+        android:contentDescription="@string/recipe" />
+
+    <TextView
+        android:id="@+id/recipesListPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/orange"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/recipesListPriceIcon"
+        app:layout_constraintTop_toBottomOf="@+id/recipesListName"
+        tools:text="35" />
 
     <View
         android:layout_width="wrap_content"

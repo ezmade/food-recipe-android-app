@@ -6,37 +6,106 @@
     android:layout_height="match_parent"
     tools:context=".feature.search.ui.CustomSearchFragment">
 
-    <Spinner
-        android:id="@+id/spinnerCategories"
+    <TextView
+        android:id="@+id/tvDietType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvDietType"
+        android:textSize="20sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toTopOf="@id/spinnerDietType"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerDietType"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:entries="@array/dietNames"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDietType" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/spinnerDietType"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDishType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvDishType"
+        android:textSize="20sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toBottomOf="@id/spinnerDietType"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toTopOf="@id/spinnerDishType"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerDishType"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:entries="@array/categoryNames"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tvDishType" />
 
-    <Spinner
-        android:id="@+id/spinnerAreas"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:entries="@array/areaNames"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinnerCategories" />
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toTopOf="@id/etNumbersOfRecipes"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/etIngredients"
+        android:id="@+id/etNumbersOfRecipes"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:hint="@string/etIngredientsHint"
+        android:layout_height="75dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/etNumberOfRecipesHint"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerAreas" />
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDishType"
+        android:autofillHints="" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/etNumbersOfRecipes"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:textColor="@color/white"
         android:text="@string/btnSearchText"
-        app:layout_constraintTop_toBottomOf="@id/etIngredients"
+        app:layout_constraintTop_toBottomOf="@id/etNumbersOfRecipes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

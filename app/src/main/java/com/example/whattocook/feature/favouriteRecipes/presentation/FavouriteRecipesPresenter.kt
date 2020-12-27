@@ -19,4 +19,6 @@ class FavouriteRecipesPresenter(
     fun onRecipeClick(recipe: Recipe) {
         viewState.openRecipeDetails(recipe)
     }
+
+
 }

@@ -5,21 +5,28 @@ import moxy.MvpPresenter
 
 class CustomSearchPresenter : MvpPresenter<CustomSearchView>() {
 
-    private var selectedCategory = "Beef"
-    private var selectedArea = "British"
+    fun validate(
+            selectedDietType: String,
+            selectedDishType: String,
+            numberOfRecipes: String
+    ) {
+        try {
+            val number = numberOfRecipes.toInt()
+            var tags = ""
 
-    fun setCategory(selectedCategory: String) {
-        this.selectedCategory = selectedCategory
-    }
+            if ((number < 1) || (number > 100)) {
+                viewState.showNumberOfRecipesError()
+            } else
+                tags = if ((selectedDietType != "") && (selectedDishType != ""))
+                        "$selectedDietType,$selectedDishType"
+                    else if (selectedDietType != "")
+                        selectedDietType
+                    else
+                        selectedDishType
 
-    fun setArea(selectedArea: String) {
-        this.selectedArea = selectedArea
-    }
-
-    fun validate(ingredient: String, ingredientsList: Array<String>) {
-        if (!ingredientsList.contains(ingredient)) {
-            viewState.showIngredientsError()
+                viewState.setFilters(number, tags)
+        } catch(t: Throwable) {
+            viewState.showNumberOfRecipesError()
         }
     }
-
 }
