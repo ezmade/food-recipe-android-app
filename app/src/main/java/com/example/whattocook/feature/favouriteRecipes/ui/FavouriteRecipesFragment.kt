@@ -22,7 +22,7 @@ class FavouriteRecipesFragment : MvpAppCompatFragment(R.layout.fragment_favourit
         fun newInstance() = FavouriteRecipesFragment()
     }
 
-    private lateinit var binding: FragmentFavouriteRecipesBinding
+    private var binding: FragmentFavouriteRecipesBinding? = null
     private val presenter: FavouriteRecipesPresenter by moxyPresenter {
         FavouriteRecipesPresenter(
                 favouritesDao = FavouritesDaoImpl(
@@ -36,14 +36,20 @@ class FavouriteRecipesFragment : MvpAppCompatFragment(R.layout.fragment_favourit
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFavouriteRecipesBinding.bind(view)
-        with(binding.rvRecipesList) {
+        with(binding!!.rvRecipesList) {
             favouriteRecipesAdapter = RecipesListAdapter(context, onRecipeClick = {
                 presenter.onRecipeClick(it)
             })
             layoutManager = LinearLayoutManager(context)
             adapter = favouriteRecipesAdapter
-            }
         }
+    }
+
+    override fun onDestroyView() {
+        favouriteRecipesAdapter = null
+        binding = null
+        super.onDestroyView()
+    }
 
     override fun openRecipeDetails(recipe: Recipe) {
         requireFragmentManager().beginTransaction()
@@ -52,8 +58,8 @@ class FavouriteRecipesFragment : MvpAppCompatFragment(R.layout.fragment_favourit
             .commit()
     }
 
-    override fun setRecipes(recipe: List<Recipe>) {
-        favouriteRecipesAdapter?.setData(recipe)
+    override fun setRecipes(recipes: List<Recipe>) {
+        favouriteRecipesAdapter?.setData(recipes)
     }
 }
 

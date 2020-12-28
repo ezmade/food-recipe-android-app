@@ -35,7 +35,7 @@ class RecipeDetailsFragment : MvpAppCompatFragment(R.layout.fragment_recipe_deta
             }
     }
 
-    private lateinit var binding: FragmentRecipeDetailsBinding
+    private var binding: FragmentRecipeDetailsBinding? = null
     private val presenter: RecipeDetailsPresenter by moxyPresenter {
         RecipeDetailsPresenter(
                 recipe = arguments?.getParcelable(RECIPE)!!,
@@ -48,18 +48,23 @@ class RecipeDetailsFragment : MvpAppCompatFragment(R.layout.fragment_recipe_deta
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRecipeDetailsBinding.bind(view)
-        binding.btnViewOnWebsite.setOnClickListener {
+        binding!!.btnViewOnWebsite.setOnClickListener {
             presenter.onViewOnWebsiteClicked(arguments?.getParcelable(RECIPE)!!)
         }
-        binding.btnAddToFavourites.setOnClickListener{
+        binding!!.btnAddToFavourites.setOnClickListener{
             presenter.onFavouriteClicked()
         }
-        binding.btnShare.setOnClickListener {
+        binding!!.btnShare.setOnClickListener {
             presenter.onShareClicked(
-                    binding.recipesImage.drawable.toBitmap(),
+                    binding!!.recipesImage.drawable.toBitmap(),
                     arguments?.getParcelable(RECIPE)!!
             )
         }
+    }
+
+    override fun onDestroyView() {
+        binding = null
+        super.onDestroyView()
     }
 
     override fun setRecipe(recipe: Recipe) {
@@ -67,11 +72,11 @@ class RecipeDetailsFragment : MvpAppCompatFragment(R.layout.fragment_recipe_deta
                 .load(recipe.img)
                 .resize(300, 300)
                 .centerCrop()
-                .into(binding.recipesImage)
-        binding.recipeName.text = recipe.name
-        binding.recipesTimeReady.text = "${recipe.ready} min"
-        binding.recipesPrice.text = String.format("%.2f", recipe.price / 100)
-        binding.recipeInstructions.text = recipe.instructions.formatted()
+                .into(binding!!.recipesImage)
+        binding!!.recipeName.text = recipe.name
+        binding!!.recipesTimeReady.text = "${recipe.ready} min"
+        binding!!.recipesPrice.text = String.format("%.2f", recipe.price / 100)
+        binding!!.recipeInstructions.text = recipe.instructions.formatted()
     }
 
     override fun openViewOnWebsite(recipe: Recipe) {
@@ -81,7 +86,7 @@ class RecipeDetailsFragment : MvpAppCompatFragment(R.layout.fragment_recipe_deta
     }
 
     override fun setIsInFavourites(inFavourites: Boolean) {
-        binding.btnAddToFavourites.setImageResource(
+        binding!!.btnAddToFavourites.setImageResource(
                 if (inFavourites) R.drawable.ic_baseline_favourite_filled
                 else R.drawable.ic_baseline_favourite
         )
@@ -111,6 +116,9 @@ class RecipeDetailsFragment : MvpAppCompatFragment(R.layout.fragment_recipe_deta
     }
 }
 
+/**
+ * Replaced HTML tags from string
+ */
 private fun String.formatted(): String {
     return "\t\t" + this
             .replace("<ol><li>", "")
@@ -126,5 +134,5 @@ private fun String.formatted(): String {
             .replace("</em>", "")
             .replace("</li></ul>", "")
             .replace("<span>", "")
-            .replace("</span", "")
+            .replace("</span>", "")
 }

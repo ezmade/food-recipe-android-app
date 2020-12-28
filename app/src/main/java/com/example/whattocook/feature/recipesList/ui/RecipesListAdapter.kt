@@ -35,7 +35,6 @@ class RecipesListAdapter(
         val item = recipes[position]
         Picasso.with(context)
             .load(item.img)
-            .priority(Picasso.Priority.HIGH)
             .resize(100, 100)
             .centerCrop()
             .into(holder.recipesImage)

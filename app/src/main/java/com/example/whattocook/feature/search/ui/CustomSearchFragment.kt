@@ -16,7 +16,7 @@ class CustomSearchFragment : MvpAppCompatFragment(R.layout.fragment_custom_searc
     private val presenter : CustomSearchPresenter by moxyPresenter {
         CustomSearchPresenter()
     }
-    private lateinit var binding: FragmentCustomSearchBinding
+    private var binding: FragmentCustomSearchBinding? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,18 +25,23 @@ class CustomSearchFragment : MvpAppCompatFragment(R.layout.fragment_custom_searc
         initListeners()
     }
 
+    override fun onDestroyView() {
+        binding = null
+        super.onDestroyView()
+    }
+
     private fun initListeners() {
         var selectedDietType: String
         var selectedDishType: String
 
         binding = FragmentCustomSearchBinding.bind(requireView())
-        binding.btnSearch.setOnClickListener {
-            selectedDietType = binding.spinnerDietType.selectedItem.toString()
-            selectedDishType = binding.spinnerDishType.selectedItem.toString()
+        binding!!.btnSearch.setOnClickListener {
+            selectedDietType = binding!!.spinnerDietType.selectedItem.toString()
+            selectedDishType = binding!!.spinnerDishType.selectedItem.toString()
             presenter.validate(
                     selectedDietType,
                     selectedDishType,
-                    binding.etNumbersOfRecipes.text.toString()
+                    binding!!.etNumbersOfRecipes.text.toString()
             )
         }
     }

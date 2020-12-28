@@ -9,7 +9,7 @@ import moxy.viewstate.strategy.StateStrategyType
 interface FavouriteRecipesView : MvpView {
 
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun setRecipes(recipeData: List<Recipe>)
+    fun setRecipes(recipes: List<Recipe>)
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun openRecipeDetails(recipe: Recipe)

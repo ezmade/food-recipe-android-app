@@ -24,7 +24,6 @@ class RecipesListPresenter(
         })
     }
 
-
     fun onRecipeClick(recipe: Recipe) {
         viewState.openRecipeDetails(recipe)
     }

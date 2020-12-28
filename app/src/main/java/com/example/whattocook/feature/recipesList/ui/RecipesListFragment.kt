@@ -37,7 +37,7 @@ class RecipesListFragment : MvpAppCompatFragment(R.layout.fragment_recipes_list)
     }
 
 
-    private lateinit var binding: FragmentRecipesListBinding
+    private var binding: FragmentRecipesListBinding? = null
     private val presenter: RecipesListPresenter by moxyPresenter {
         RecipesListPresenter(
                 arguments?.getInt(NUMBER) ?: 25,
@@ -50,8 +50,12 @@ class RecipesListFragment : MvpAppCompatFragment(R.layout.fragment_recipes_list)
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRecipesListBinding.bind(view)
 
-        with(binding.rvRecipesList) {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        with(binding!!.rvRecipesList) {
+            layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.VERTICAL,
+                    false)
+
             adapter = RecipesListAdapter(context, onRecipeClick = { recipe ->
                 presenter.onRecipeClick(recipe)
             }).also {
@@ -59,26 +63,20 @@ class RecipesListFragment : MvpAppCompatFragment(R.layout.fragment_recipes_list)
             }
         }
 
-        binding.btnCustomSearch.setOnClickListener {
+        binding!!.btnCustomSearch.setOnClickListener {
             openCustomSearch()
         }
 
-        binding.btnViewFavourites.setOnClickListener {
+        binding!!.btnViewFavourites.setOnClickListener {
             presenter.onFavouritesClick()
         }
-
-
-
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
 
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         recipesAdapter = null
+        binding = null
+        super.onDestroyView()
     }
 
     override fun setRecipes(recipeData: List<Recipe>) {
@@ -86,7 +84,7 @@ class RecipesListFragment : MvpAppCompatFragment(R.layout.fragment_recipes_list)
     }
 
     override fun showLoading(isShow: Boolean) {
-        binding.recipesListProgressBar.isVisible = isShow
+        binding!!.recipesListProgressBar.isVisible = isShow
     }
 
     override fun openRecipeDetails(recipe: Recipe) {

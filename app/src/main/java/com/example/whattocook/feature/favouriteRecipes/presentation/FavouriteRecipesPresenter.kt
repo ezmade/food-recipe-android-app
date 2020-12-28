@@ -8,12 +8,12 @@ class FavouriteRecipesPresenter(
         private val favouritesDao: FavouritesDao
 ) : MvpPresenter<FavouriteRecipesView>()  {
 
-    private var recipeData: List<Recipe> = emptyList()
+    private var recipes: List<Recipe> = emptyList()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        recipeData = favouritesDao.getAll()
-        viewState.setRecipes(recipeData)
+        recipes = favouritesDao.getAll()
+        viewState.setRecipes(recipes)
     }
 
     fun onRecipeClick(recipe: Recipe) {
